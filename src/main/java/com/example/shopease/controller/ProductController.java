@@ -19,10 +19,10 @@ public class ProductController {
         return "index";
     }
     
-    @GetMapping("/checkout")
-    public String checkout() {
-        return "checkout";
-    }
+    // @GetMapping("/checkout")
+    // public String checkout() {
+    //     return "checkout";
+    // }
     
     @GetMapping("/payment")
     public String payment() {
