@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.shopease.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
