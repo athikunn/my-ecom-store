@@ -65,6 +65,7 @@ class Cart {
     updateCartDisplay() {
         const cartItems = document.getElementById('cart-items');
         const cartTotal = document.getElementById('cart-total');
+        const checkoutLink = document.querySelector('a[href="/checkout"]');
 
         cartItems.innerHTML = this.items.map(item => `
             <div class="py-4 flex justify-between">
@@ -86,7 +87,13 @@ class Cart {
             </div>
         `).join('');
 
-        cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
+        const total = this.getTotal();
+        cartTotal.textContent = `$${total.toFixed(2)}`;
+        
+        // Update the checkout link to include the total as a URL parameter
+        if (checkoutLink) {
+            checkoutLink.href = `/checkout?total=${total.toFixed(2)}`;
+        }
     }
 }
 

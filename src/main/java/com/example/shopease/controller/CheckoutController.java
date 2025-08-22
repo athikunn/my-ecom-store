@@ -71,9 +71,20 @@ public class CheckoutController {
        PUBLIC ENDPOINT
        ========================================================================= */
     @GetMapping("/checkout")
-    public String showCheckout(Model model) {
+    public String showCheckout(@RequestParam(required = false) String total, Model model) {
 
         try {
+            /* Update the total amount in the payload if provided ------------------- */
+            if (total != null && !total.isEmpty()) {
+                // Update the payloadJson object
+                ((ObjectNode) payloadJson.path("orderInformation").path("amountDetails")).put("totalAmount", total);
+                
+                // Update the requestData object with the new payload
+                requestData.setPayload(objectMapper.writeValueAsString(payloadJson));
+                
+                System.out.println("Updated order amount to: " + total);
+            }
+            
             /* CyberSource round-trip ------------------------------------------------ */
             String jwt = captureContextService.getCaptureContext(requestData);
 
